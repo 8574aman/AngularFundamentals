@@ -6,13 +6,17 @@ import { CreateEventComponent } from './app/events/shared/create-event.component
 import { Error404Component } from './app/error/404.component';
 import { EVentRouteActivator } from './app/events/event-details/event-route-activator.service';
 import { EventListResolver } from './app/events/event-list-resolver.service';
+import { UserModule } from './app/events/user/user.module';
+
 export const appRoutes : Routes = [
     {path : 'events' , component : EventsListComponent , resolve : {events : EventListResolver}},
     {path : 'events/new' , component  : CreateEventComponent , canDeactivate : ['canDeactivateCreateEvent']},
  
     {path : 'events/:id' , component : EventDetailsComponent, canActivate : [EVentRouteActivator] },
     {path : '404' , component : Error404Component},
-    {path : '' , redirectTo : '/events' , pathMatch : 'full'}
+    {path : '' , redirectTo : '/events' , pathMatch : 'full'},
+    {path : 'user', loadChildren: './events/user/user.module#UserModule'}
+    
 
 ]
   
